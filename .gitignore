@@ -1,0 +1,4 @@
+# Apple
+.DS_Store
+# CMake
+build/

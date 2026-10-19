@@ -1,0 +1,87 @@
+/**
+ * \mainpage Microfono
+ *
+ * \~spanish
+ *
+ * [English version](../en/index.html)
+ *
+ * Biblioteca para leer microfonos electret con microcontroladores, y medir
+ * la amplitud del sonido. Funciona con placas Arduino y con placas
+ * Raspberry Pi Pico, tanto desde Arduino como desde el Pico SDK.
+ *
+ * ## Conexiones
+ *
+ * El microfono va con un modulo amplificador, por ejemplo MAX4466 o MAX9814.
+ * El modulo tiene tres patitas: VCC va a voltaje, GND a tierra, y OUT a una
+ * entrada analoga.
+ *
+ * En Raspberry Pi Pico usa 3.3V (patita `3V3`, nunca 5V) y una de las patitas
+ * con conversor analogo-digital: GPIO 26, 27 o 28. Pico lee de 0 a 4095,
+ * no de 0 a 1023 como Arduino Uno.
+ *
+ * ## Por donde empezar
+ *
+ * - La clase Microfono tiene todo lo que necesitas para leer un microfono.
+ * - En la pagina de ejemplos hay ejemplos para Arduino y para Pico SDK.
+ * - El espacio de nombres MicrofonoHardware explica como agregar otra plataforma.
+ *
+ * \~english
+ *
+ * [Versión en español](../es/index.html)
+ *
+ * Library for reading electret microphones with microcontrollers, and
+ * measuring the amplitude of sound. It works with Arduino boards and with
+ * Raspberry Pi Pico boards, both from Arduino and from the Pico SDK.
+ *
+ * ## Wiring
+ *
+ * The microphone goes with an amplifier module, for example MAX4466 or
+ * MAX9814. The module has three pins: VCC goes to voltage, GND to ground, and
+ * OUT to an analog input.
+ *
+ * On Raspberry Pi Pico use 3.3V (the `3V3` pin, never 5V) and one of the pins
+ * with an analog-to-digital converter: GPIO 26, 27 or 28. Pico reads 0 to
+ * 4095, not 0 to 1023 like Arduino Uno.
+ *
+ * ## Where to start
+ *
+ * - The Microfono class has everything you need to read a microphone.
+ * - The examples page has examples for Arduino and for the Pico SDK.
+ * - The MicrofonoHardware namespace explains how to add another platform.
+ */
+
+/**
+ * \example ej00_leerMicrofono/ej00_leerMicrofono.ino
+ * \~spanish Arduino: imprime la amplitud del sonido.
+ * \~english Arduino: prints the amplitude of the sound.
+ */
+
+/**
+ * \example ej01_sinBloquear/ej01_sinBloquear.ino
+ * \~spanish Arduino: lee el microfono sin bloquear, mientras parpadea el led de la placa.
+ * \~english Arduino: reads the microphone without blocking, while the board's LED blinks.
+ */
+
+/**
+ * \example ej02_calibrar/ej02_calibrar.ino
+ * \~spanish Arduino: mide el ruido en silencio y lo resta de la amplitud.
+ * \~english Arduino: measures the noise in silence and subtracts it from the amplitude.
+ */
+
+/**
+ * \example ej00_leerMicrofono/main.cpp
+ * \~spanish Pico SDK: imprime la amplitud del sonido.
+ * \~english Pico SDK: prints the amplitude of the sound.
+ */
+
+/**
+ * \example ej01_sinBloquear/main.cpp
+ * \~spanish Pico SDK: lee el microfono sin bloquear, mientras parpadea el led de la placa.
+ * \~english Pico SDK: reads the microphone without blocking, while the board's LED blinks.
+ */
+
+/**
+ * \example ej02_calibrar/main.cpp
+ * \~spanish Pico SDK: mide el ruido en silencio y lo resta de la amplitud.
+ * \~english Pico SDK: measures the noise in silence and subtracts it from the amplitude.
+ */

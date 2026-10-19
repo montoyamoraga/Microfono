@@ -1,0 +1,20 @@
+################################
+# Clases
+################################
+
+Microfono	KEYWORD1
+
+################################
+# Metodos y funciones
+################################
+
+setPatita	KEYWORD2
+setVentana	KEYWORD2
+leer	KEYWORD2
+escuchar	KEYWORD2
+calibrar	KEYWORD2
+setRuido	KEYWORD2
+getRuido	KEYWORD2
+getAmplitud	KEYWORD2
+getMinimo	KEYWORD2
+getMaximo	KEYWORD2

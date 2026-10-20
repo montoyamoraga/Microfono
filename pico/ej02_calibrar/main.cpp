@@ -33,7 +33,7 @@ int main()
         microfono.leer();
 
         // imprimir ruido y amplitud.
-        // en silencio la amplitud queda en 0
+        // en silencio la amplitud queda cerca de 0
         printf("ruido:%u,amplitud:%u\n", microfono.getRuido(), microfono.getAmplitud());
     }
 }

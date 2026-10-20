@@ -23,6 +23,8 @@ Microfono::Microfono(uint8_t nuevaPatita)
 void Microfono::setPatita(uint8_t nuevaPatita)
 {
     patita = nuevaPatita;
+
+    MicrofonoHardware::configurarEntradaAnaloga(patita);
 }
 
 void Microfono::setVentana(uint16_t milisegundos)
@@ -84,9 +86,11 @@ bool Microfono::escuchar()
 
 void Microfono::calibrar(uint16_t milisegundos)
 {
-    // guardar la mayor amplitud y no el promedio,
-    // asi el silencio queda en 0 casi siempre
-    uint16_t mayorAmplitud = 0;
+    // guardar el promedio y no la mayor amplitud,
+    // asi un golpe o una falla durante la calibracion
+    // no deja al microfono sordo
+    uint32_t sumaAmplitudes = 0;
+    uint32_t ventanas = 0;
 
     // escuchar al menos una ventana completa,
     // aunque milisegundos sea menor que la ventana
@@ -95,14 +99,11 @@ void Microfono::calibrar(uint16_t milisegundos)
     {
         leer();
 
-        uint16_t amplitud = maximo - minimo;
-        if (amplitud > mayorAmplitud)
-        {
-            mayorAmplitud = amplitud;
-        }
+        sumaAmplitudes += maximo - minimo;
+        ventanas++;
     } while (MicrofonoHardware::milisegundos() - inicio < milisegundos);
 
-    ruido = mayorAmplitud;
+    ruido = sumaAmplitudes / ventanas;
 }
 
 void Microfono::setRuido(uint16_t nuevoRuido)

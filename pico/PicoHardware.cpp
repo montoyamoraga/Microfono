@@ -6,6 +6,14 @@
 namespace MicrofonoHardware
 {
 
+    // la ultima entrada del adc es el sensor de temperatura,
+    // las anteriores son gpio desde ADC_BASE_PIN
+    static bool esPatitaAnaloga(uint8_t patita)
+    {
+        return patita >= ADC_BASE_PIN &&
+               patita < ADC_BASE_PIN + NUM_ADC_CHANNELS - 1;
+    }
+
     void configurarEntradaAnaloga(uint8_t patita)
     {
         // iniciar el adc solo una vez,
@@ -27,11 +35,20 @@ namespace MicrofonoHardware
             adcIniciado = true;
         }
 
-        adc_gpio_init(patita);
+        if (esPatitaAnaloga(patita))
+        {
+            adc_gpio_init(patita);
+        }
     }
 
     uint16_t leerPatita(uint8_t patita)
     {
+        // una patita sin adc se lee como silencio
+        if (!esPatitaAnaloga(patita))
+        {
+            return 0;
+        }
+
         // en pico la patita es un gpio con adc,
         // por ejemplo gpio 26 es la entrada 0
         adc_select_input(patita - ADC_BASE_PIN);

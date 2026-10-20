@@ -44,11 +44,11 @@ public:
 
     /**
      * \~spanish
-     * @brief Cambia la patita guardada, sin volver a configurarla.
+     * @brief Cambia la patita y la configura como entrada analoga.
      * @param nuevaPatita nueva patita.
      *
      * \~english
-     * @brief Changes the stored pin, without configuring it again.
+     * @brief Changes the pin and configures it as an analog input.
      * @param nuevaPatita new pin.
      */
     void setPatita(uint8_t nuevaPatita);
@@ -119,8 +119,10 @@ public:
      * @brief Mide el ruido del microfono en silencio y lo guarda.
      *
      * Aun en silencio la amplitud no es 0, por el ruido de la placa y del
-     * modulo. calibrar() escucha durante el tiempo indicado, guarda la mayor
-     * amplitud que encuentra como ruido, y desde ahi getAmplitud() se lo resta.
+     * modulo. calibrar() escucha durante el tiempo indicado, guarda el
+     * promedio de las amplitudes como ruido, y desde ahi getAmplitud() se lo
+     * resta. Como es un promedio, en silencio la amplitud queda cerca de 0,
+     * con saltos pequenos.
      *
      * Bloquea el programa mientras dura. Hay que llamarla en silencio,
      * por ejemplo en setup().
@@ -132,8 +134,9 @@ public:
      *
      * Even in silence the amplitude is not 0, because of noise from the
      * board and the module. calibrar() listens for the given time, stores
-     * the largest amplitude it finds as noise, and from then on getAmplitud()
-     * subtracts it.
+     * the average of the amplitudes as noise, and from then on getAmplitud()
+     * subtracts it. Since it is an average, in silence the amplitude stays
+     * near 0, with small jumps.
      *
      * It blocks the program while it lasts. Call it in silence,
      * for example in setup().
@@ -178,7 +181,7 @@ public:
      * Es la diferencia entre la lectura maxima y la minima (pico a pico),
      * menos el ruido. Nunca es menor que 0. Sin calibrar, el ruido es 0.
      *
-     * @return amplitud pico a pico, 0 en silencio si se calibro.
+     * @return amplitud pico a pico, cerca de 0 en silencio si se calibro.
      *
      * \~english
      * @brief Amplitude of the sound in the last window, without the noise.
@@ -187,7 +190,7 @@ public:
      * (peak to peak), minus the noise. It is never below 0. Without
      * calibrating, the noise is 0.
      *
-     * @return peak-to-peak amplitude, 0 in silence if calibrated.
+     * @return peak-to-peak amplitude, near 0 in silence if calibrated.
      */
     uint16_t getAmplitud();
 

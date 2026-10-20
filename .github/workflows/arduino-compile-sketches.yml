@@ -2,12 +2,16 @@
 
 name: Arduino Compile
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
+  # Triggers the workflow on push to the main branch, and on pull requests
   push:
     branches:
       - main
+    paths:
+      - src/**
+      - examples/**
+  pull_request:
     paths:
       - src/**
       - examples/**
@@ -19,11 +23,26 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    # compilar los ejemplos para cada placa
+    strategy:
+      fail-fast: false
+      matrix:
+        placa:
+          - fqbn: arduino:avr:uno
+            plataforma: arduino:avr
+          - fqbn: arduino:renesas_uno:unor4wifi
+            plataforma: arduino:renesas_uno
+          - fqbn: arduino:renesas_uno:minima
+            plataforma: arduino:renesas_uno
+
     # Steps represent a sequence of tasks that will be run as part of the job
     steps:
       - uses: actions/checkout@v4
       - uses: arduino/compile-sketches@v1
         with:
+          fqbn: ${{ matrix.placa.fqbn }}
+          platforms: |
+            - name: ${{ matrix.placa.plataforma }}
           sketch-paths: |
             - examples/
           libraries: |

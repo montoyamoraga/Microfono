@@ -2,8 +2,10 @@
 // mientras el led de la placa parpadea a su propio ritmo
 
 // conexiones:
-// modulo del microfono: VCC a 5V o 3.3V, GND a tierra (GND),
+// modulo del microfono: VCC al voltaje de la placa, GND a tierra (GND),
 // salida (OUT) a A0
+// en Arduino Uno usa 5V. en placas de 3.3V (por ejemplo Nano 33 o ESP32)
+// usa 3.3V, con 5V la salida puede danar la patita
 
 // incluir biblioteca
 #include "Microfono.h"

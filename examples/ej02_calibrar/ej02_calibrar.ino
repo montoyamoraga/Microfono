@@ -2,8 +2,10 @@
 // y despues mostrar la amplitud sin ese ruido
 
 // conexiones:
-// modulo del microfono: VCC a 5V o 3.3V, GND a tierra (GND),
+// modulo del microfono: VCC al voltaje de la placa, GND a tierra (GND),
 // salida (OUT) a A0
+// en Arduino Uno usa 5V. en placas de 3.3V (por ejemplo Nano 33 o ESP32)
+// usa 3.3V, con 5V la salida puede danar la patita
 
 // incluir biblioteca
 #include "Microfono.h"
@@ -30,7 +32,7 @@ void loop()
   microfono.leer();
 
   // imprimir ruido y amplitud, en formato para el plotter serial.
-  // en silencio la amplitud queda en 0
+  // en silencio la amplitud queda cerca de 0
   Serial.print("ruido:");
   Serial.print(microfono.getRuido());
   Serial.print(",amplitud:");
